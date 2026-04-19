@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Missouri Parent Organizing Fellowship — what you told us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF7EF;          /* warm cream paper */
+    --bg-2:#F6EFDD;        /* slightly deeper cream */
+    --ink:#22223B;         /* deep warm indigo-black */
+    --mute:#6B6A7A;
+    --rule:#E6DFCE;
+    --coral:#E63946;       /* tomato red */
+    --yellow:#FFD166;      /* highlighter yellow */
+    --sage:#6A994E;        /* classroom green */
+    --blue:#457B9D;        /* dusty blue */
+    --plum:#6A4C93;        /* violet */
+    --peach:#F4A261;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    height:100%;background:var(--bg);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+  }
+  /* subtle paper texture */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+    background-image:
+      radial-gradient(rgba(34,34,59,.035) 1px, transparent 1px);
+    background-size:18px 18px;
+  }
+  body{overflow:hidden;}
+  .deck{position:relative;width:100vw;height:100vh;z-index:2;}
+  .slide{
+    position:absolute;inset:0;
+    padding:6vh 7vw;
+    display:flex;flex-direction:column;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .2s ease;
+    overflow-y:auto;
+  }
+  .slide.active{opacity:1;pointer-events:auto;}
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--mute);margin-bottom:1.8rem;
+    display:flex;gap:1rem;align-items:center;
+  }
+  .eyebrow .bead{
+    width:10px;height:10px;border-radius:50%;background:var(--coral);
+  }
+  .eyebrow.sage .bead{background:var(--sage);}
+  .eyebrow.blue .bead{background:var(--blue);}
+  .eyebrow.plum .bead{background:var(--plum);}
+  .eyebrow.yellow .bead{background:var(--yellow);}
+  .eyebrow.peach .bead{background:var(--peach);}
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-size:clamp(2.4rem,5.2vw,4.6rem);
+    font-weight:500;letter-spacing:-.01em;line-height:1.02;
+    margin-bottom:1.4rem;
+    font-variation-settings:"opsz" 144;
+  }
+  h1.small{font-size:clamp(1.9rem,3.5vw,2.8rem);line-height:1.08;}
+  h2{
+    font-family:'Fraunces',serif;
+    font-size:clamp(1.5rem,2.3vw,2.1rem);
+    font-weight:500;letter-spacing:-.005em;line-height:1.15;margin-bottom:1rem;
+  }
+  p.lede{
+    font-size:clamp(1.08rem,1.45vw,1.22rem);line-height:1.55;color:var(--ink);
+    max-width:64ch;
+  }
+  p.meta{font-size:.92rem;color:var(--ink);line-height:1.55;max-width:65ch;opacity:.8;}
+
+  /* highlighter — hand-drawn-ish marker underline */
+  .hl{
+    background:linear-gradient(180deg, transparent 58%, var(--yellow) 58%, var(--yellow) 92%, transparent 92%);
+    padding:0 .12em;
+  }
+  .hl.sage{background:linear-gradient(180deg, transparent 58%, rgba(106,153,78,.4) 58%, rgba(106,153,78,.4) 92%, transparent 92%);}
+  .hl.coral{background:linear-gradient(180deg, transparent 58%, rgba(230,57,70,.25) 58%, rgba(230,57,70,.25) 92%, transparent 92%);}
+
+  /* quote block */
+  .quote{
+    position:relative;
+    padding:.2rem 0 .2rem 1.4rem;
+    margin:1rem 0;
+    max-width:66ch;
+    font-size:clamp(1rem,1.22vw,1.14rem);
+    line-height:1.55;
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-style:italic;
+    font-variation-settings:"opsz" 14;
+  }
+  .quote::before{
+    content:"";position:absolute;left:0;top:.25rem;bottom:.25rem;
+    width:3px;background:var(--coral);
+  }
+  .quote.sage::before{background:var(--sage);}
+  .quote.blue::before{background:var(--blue);}
+  .quote.plum::before{background:var(--plum);}
+  .quote.yellow::before{background:var(--peach);}
+  .quote + .quote{margin-top:1.4rem;}
+  .quote .who{
+    display:block;margin-top:.75rem;
+    font-family:'Inter',sans-serif;font-style:normal;
+    font-size:.78rem;letter-spacing:.04em;
+    color:var(--mute);text-transform:uppercase;font-weight:500;
+  }
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;max-width:1400px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;max-width:1400px;}
+  @media (max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* stat card — colored construction-paper feel */
+  .stat{
+    background:var(--bg-2);
+    padding:1.4rem 1.2rem;
+    border:1.5px solid var(--ink);
+    position:relative;
+  }
+  .stat.coral{background:#FBE0DE;}
+  .stat.yellow{background:#FFF2CB;}
+  .stat.sage{background:#E0EBD4;}
+  .stat.blue{background:#D9E4EC;}
+  .stat.plum{background:#E5DCEF;}
+  .stat .n{
+    font-family:'Fraunces',serif;
+    font-size:clamp(2.2rem,4.2vw,3.4rem);font-weight:600;
+    letter-spacing:-.02em;line-height:1;
+    font-variation-settings:"opsz" 144;
+  }
+  .stat .lbl{font-size:.86rem;color:var(--ink);margin-top:.5rem;line-height:1.35;opacity:.8;}
+
+  /* horizontal bar list */
+  .bars{max-width:760px;margin-top:1rem;}
+  .bar-row{display:grid;grid-template-columns:240px 1fr 40px;gap:14px;align-items:center;margin-bottom:.7rem;font-size:.96rem;}
+  .bar-row .label{color:var(--ink);}
+  .bar-row .track{height:18px;background:var(--bg-2);border:1px solid var(--ink);}
+  .bar-row .fill{height:100%;}
+  .bar-row .n{color:var(--ink);font-weight:600;text-align:right;font-family:'Fraunces',serif;}
+
+  /* chips */
+  .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.2rem;max-width:900px;}
+  .chip{
+    background:var(--bg-2);
+    border:1.5px solid var(--ink);
+    padding:.35rem .7rem;font-size:.85rem;
+    transform:rotate(-.4deg);
+  }
+  .chip:nth-child(3n+1){background:#FFF2CB;transform:rotate(.6deg);}
+  .chip:nth-child(3n+2){background:#E0EBD4;transform:rotate(-.8deg);}
+  .chip:nth-child(3n+3){background:#FBE0DE;transform:rotate(.3deg);}
+  .chip:nth-child(5n+1){background:#D9E4EC;}
+
+  /* Q list */
+  ul.qs{list-style:none;max-width:80ch;}
+  ul.qs li{
+    padding:.85rem 0;border-bottom:1px dashed var(--rule);
+    font-size:1.02rem;line-height:1.55;
+    font-family:'Fraunces',serif;font-style:italic;
+  }
+  ul.qs li:first-child{border-top:1px dashed var(--rule);}
+  ul.qs li .ask{
+    display:block;color:var(--mute);font-size:.78rem;
+    letter-spacing:.04em;text-transform:uppercase;margin-top:.35rem;
+    font-family:'Inter',sans-serif;font-style:normal;font-weight:500;
+  }
+
+  /* pull quote */
+  .pull{
+    font-family:'Fraunces',serif;
+    font-size:clamp(1.7rem,2.9vw,2.6rem);
+    font-weight:400;line-height:1.22;letter-spacing:-.005em;
+    max-width:22ch;
+    position:relative;
+    font-variation-settings:"opsz" 60;
+  }
+  .pull::before{
+    content:"\201C";
+    position:absolute;left:-.55em;top:-.15em;
+    font-size:2.4em;line-height:1;color:var(--coral);
+    font-family:'Fraunces',serif;font-weight:500;
+  }
+  .pull .who{
+    display:block;margin-top:1.4rem;font-size:.86rem;
+    font-family:'Inter',sans-serif;text-transform:uppercase;
+    letter-spacing:.1em;color:var(--mute);font-weight:500;
+  }
+
+  /* handwritten accent */
+  .scribble{
+    font-family:'Caveat',cursive;
+    font-weight:500;
+    font-size:1.3rem;
+    color:var(--coral);
+    transform:rotate(-2deg);
+    display:inline-block;
+  }
+
+  /* HUD */
+  .hud{
+    position:fixed;bottom:18px;left:24px;right:24px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:11px;letter-spacing:.1em;color:var(--mute);
+    text-transform:uppercase;z-index:10;pointer-events:none;font-weight:500;
+  }
+  .hud .left,.hud .right{display:flex;gap:.7rem;align-items:center;pointer-events:auto;}
+  .hud button{
+    background:var(--bg);border:1.5px solid var(--ink);color:var(--ink);
+    font-family:inherit;font-size:inherit;letter-spacing:inherit;
+    padding:6px 12px;cursor:pointer;text-transform:uppercase;font-weight:500;
+  }
+  .hud button:hover{background:var(--yellow);}
+  .progress{
+    position:fixed;top:0;left:0;height:3px;background:var(--coral);
+    width:0;transition:width .25s ease;z-index:11;
+  }
+
+  /* title slide */
+  .title-slide{
+    background:var(--ink);color:var(--bg);
+  }
+  .title-slide::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(rgba(251,247,239,.04) 1px, transparent 1px);
+    background-size:18px 18px;
+  }
+  .title-slide .eyebrow{color:rgba(251,247,239,.6);}
+  .title-slide h1{color:var(--bg);}
+  .title-slide p.lede{color:rgba(251,247,239,.75);}
+  .title-slide .eyebrow .bead{background:var(--yellow);}
+  .title-slide .deco{
+    position:absolute;font-family:'Caveat',cursive;color:var(--yellow);
+    font-size:1.4rem;transform:rotate(-6deg);
+  }
+
+  /* big theme slides get a wee corner color */
+  .corner-dot{
+    position:absolute;top:6vh;right:7vw;
+    width:64px;height:64px;border-radius:50%;
+    background:var(--yellow);opacity:.75;
+  }
+  .corner-dot.coral{background:var(--coral);}
+  .corner-dot.sage{background:var(--sage);}
+  .corner-dot.blue{background:var(--blue);}
+  .corner-dot.plum{background:var(--plum);}
+  .corner-dot.peach{background:var(--peach);}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1. title -->
+  <section class="slide active title-slide">
+    <div class="eyebrow"><span class="bead"></span><span>Missouri Parent Organizing Fellowship · Columbia · April 2026</span></div>
+    <h1>What you told us.</h1>
+    <p class="lede">We read all 17 applications. Here's what we heard back, mostly in your words.</p>
+    <span class="deco" style="bottom:14vh;right:10vw;">Welcome in!</span>
+  </section>
+
+  <!-- 2. opening pull quote -->
+  <section class="slide">
+    <span class="corner-dot coral"></span>
+    <div class="eyebrow coral"><span class="bead"></span>Where we want to start</div>
+    <p class="pull">I talk to people everyday who are enraged but don't know what to do besides be angry. I want to help people understand their power and give them tangible opportunities to harness for our collective good.
+    <span class="who">LaNee Bridewell · Lincoln College Prep · KCPS</span></p>
+  </section>
+
+  <!-- 3. cohort shape -->
+  <section class="slide">
+    <div class="eyebrow sage"><span class="bead"></span>Who's here</div>
+    <h1 class="small">17 of you. 11 districts. One state.</h1>
+    <div class="grid3" style="margin-top:2rem;">
+      <div class="stat coral"><div class="n">17</div><div class="lbl">of you applied</div></div>
+      <div class="stat yellow"><div class="n">11</div><div class="lbl">school districts represented</div></div>
+      <div class="stat sage"><div class="n">7 / 17</div><div class="lbl">mentioned a kid with an IEP, 504, or a specific diagnosis</div></div>
+    </div>
+    <div class="grid3" style="margin-top:1.6rem;">
+      <div class="stat blue"><div class="n">7</div><div class="lbl">KCPS parents</div></div>
+      <div class="stat plum"><div class="n">6</div><div class="lbl">KC metro suburbs: NKC, Lee's Summit, Blue Springs, Independence, Gladstone</div></div>
+      <div class="stat"><div class="n">3 + 1</div><div class="lbl">St. Louis region (Kirkwood, Francis Howell) · one parent in Pleasant Hope</div></div>
+    </div>
+    <p class="meta" style="margin-top:1.8rem;">This is a Missouri cohort, not a KC cohort with visitors. Keep an eye on <span class="hl">Kendra out in Pleasant Hope</span>, who wrote that she doesn't fit in her small town and doesn't know how to organize when it feels like she's on her own. Also, Kirkwood and Francis Howell are well represented on the St. Louis side.</p>
+  </section>
+
+  <!-- 4. recruitment funnel -->
+  <section class="slide">
+    <span class="corner-dot yellow"></span>
+    <div class="eyebrow yellow"><span class="bead"></span>How you got here</div>
+    <h2>Most of you came in through Molly, or a friend who came in through Molly.</h2>
+    <div class="bars">
+      <div class="bar-row"><div class="label">Molly Fleming (direct)</div><div class="track"><div class="fill" style="width:100%;background:var(--coral);"></div></div><div class="n">7</div></div>
+      <div class="bar-row"><div class="label">A friend or another applicant told me</div><div class="track"><div class="fill" style="width:71%;background:var(--sage);"></div></div><div class="n">5</div></div>
+      <div class="bar-row"><div class="label">Parents for KC Kids (the brand)</div><div class="track"><div class="fill" style="width:43%;background:var(--blue);"></div></div><div class="n">3</div></div>
+      <div class="bar-row"><div class="label">Another leadership program (PLTI, Allison Hile)</div><div class="track"><div class="fill" style="width:29%;background:var(--plum);"></div></div><div class="n">2</div></div>
+    </div>
+    <p class="meta" style="margin-top:1.6rem;">About half of you named Molly. Another third came in because someone they trust told them to apply. That's a small funnel, and the way it gets bigger is you pulling in the next five parents over the next three months.</p>
+    <div class="quote" style="margin-top:1.4rem;">
+      How did you hear about the fellowship? — Molly Flemming (i.e. my organizing life coach).
+      <span class="who">David Tremaine · Hale Cook / KCPS</span>
+    </div>
+  </section>
+
+  <!-- 5. IEP / 504 -->
+  <section class="slide">
+    <span class="corner-dot sage"></span>
+    <div class="eyebrow sage"><span class="bead"></span>Special education</div>
+    <h1 class="small">Seven of you are raising kids with <span class="hl sage">IEPs, 504s, or diagnoses</span>.</h1>
+    <p class="lede">It came out in different places on the form. For a lot of you, fighting for your own kid is how you learned to fight at all.</p>
+    <div class="grid2" style="margin-top:1.6rem;">
+      <div>
+        <div class="quote sage">
+          George was recently diagnosed with ADHD in the fall, prior to which we were getting a lot of messages from teachers and administrators about his behavior in class. Since we have figured out his diagnosis, medication, and other behavioral supports he has been having a much more positive classroom experience. We have had some frustrations with getting a 504 plan in place, as we've been denied after a long evaluation process.
+          <span class="who">David Tremaine · Hale Cook, KCPS</span>
+        </div>
+        <div class="quote sage">
+          8th grade daughter with IEP, mixed experiences primarily related to who is IEP case manager each year as well as grade principal and school counselor. 6th grade son, requested IEP and was denied after evaluation; his overall experience has varied greatly depending on his specific teacher.
+          <span class="who">Melissa Miller · Kirkwood School District</span>
+        </div>
+      </div>
+      <div>
+        <div class="quote sage">
+          One of my twins has autism and ADHD. He has really struggled at school and I have felt like I have had to be an advocate for him a few times. He currently has an IEP.
+          <span class="who">Sierra Kilpatrick · Davidson Elementary, NKC</span>
+        </div>
+        <div class="quote sage">
+          He was diagnosed with autism and ADHD at the age of 6. He was later diagnosed with anxiety. He struggles in a traditional school setting, especially given the lack of support for special education services.
+          <span class="who">Judy Young · Independence · MO PTA Advocacy Chair</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. burnt-out few -->
+  <section class="slide">
+    <span class="corner-dot coral"></span>
+    <div class="eyebrow coral"><span class="bead"></span>The small group that keeps showing up</div>
+    <h1 class="small">You kept telling us about the <span class="hl coral">same few parents</span> doing all of it.</h1>
+    <p class="lede">From Francis Howell to Border Star Montessori, you described the same thing: a handful of people doing everything, already tired. You're here because you're one of them, and because you already know that can't keep working.</p>
+    <div class="quote">
+      What I see repeatedly, through my work with Missouri Citizens for Safe Communities, parent club, Girl Scouts, athletic boosters, and beyond, is the same small group of parents showing up every single time. Those people are invaluable, and they are burning out. That's not sustainable, and it's not a foundation you can build on. Organizing parents into leaders changes that dynamic. The skills learned don't stay siloed in one organization, they transfer across school groups, across causes, and across the community.
+      <span class="who">Stephanie Rittgers · Francis Howell · Co-President, MOCSC</span>
+    </div>
+    <div class="quote">
+      It's my first year at Border Star and while I've loved being involved in the PTA, I'm surprised by how much is being done by so few people on the exec board. I'm curious (suspicious??) that if we start reaching out to people with purpose there will be many who'd like to participate who either a) don't know all that PTA is doing, b) don't know how their skills or preferences could help, or c) need to feel invited in vs volunteering.
+      <span class="who">Ellen Schwartze · Border Star Montessori, KCPS</span>
+    </div>
+  </section>
+
+  <!-- 7. alone -->
+  <section class="slide">
+    <span class="corner-dot blue"></span>
+    <div class="eyebrow blue"><span class="bead"></span>Parents doing this alone</div>
+    <h1 class="small">A few of you are basically doing this <span class="hl">by yourselves</span>.</h1>
+    <div class="quote blue">
+      I'm a parent of a Garfield student, and I'm trying to build a community of parents there. We have had three meetings this school year. They have not all been well attended, but little by little I am beginning to form some relationships with other parents.
+      <span class="who">Benjamin Roesler · Garfield Elementary, KCPS</span>
+    </div>
+    <div class="quote blue">
+      Many! I don't really fit in my small town, and I'm unsure how to organize when it feels like I'm on my own.
+      <span class="who">Kendra Caruso · Pleasant Hope · (on what questions she has for us)</span>
+    </div>
+    <p class="meta" style="margin-top:1.4rem;">For Benjamin and Kendra, and probably a few others, this weekend is the first time they've been in a room of people doing the same work they've been doing solo. <span class="scribble">don't lose them.</span></p>
+  </section>
+
+  <!-- 8. teacher retention -->
+  <section class="slide">
+    <span class="corner-dot plum"></span>
+    <div class="eyebrow plum"><span class="bead"></span>Teachers</div>
+    <h1 class="small">Teacher retention is the thing keeping you up at night.</h1>
+    <div class="grid2" style="margin-top:1.8rem;">
+      <div>
+        <div class="quote plum">
+          Teacher retention. This is the issue that keeps me up at night. My oldest had to rearrange her schedule in high school to work around teacher shortages, particularly in the upper sciences. AP Chemistry was especially difficult; she eventually got the class she needed, but the teacher who taught her has since left the district. Within four years, there will have been three different teachers in that role, and there is no guarantee a qualified AP Chemistry teacher will be in place when my youngest is slated to take the course next fall. Five years ago, open teaching positions in FHSD attracted hundreds of applicants. Today, many postings receive only a handful.
+          <span class="who">Stephanie Rittgers · Francis Howell</span>
+        </div>
+      </div>
+      <div>
+        <div class="quote plum">
+          I want to see public education funding protected, see teacher pay increase, and improve the employment of teachers in general. We don't have a lack of teachers, we have a lack of educators who want to work in a public school setting because of the challenges it brings.
+          <span class="who">Judy Young · Independence</span>
+        </div>
+        <div class="quote plum">
+          I want to see the school (and the district) have more money to serve children and families the way they deserve, and I want to see teachers earn a higher pay that aligns with their great necessity and impact on our society.
+          <span class="who">LaNee Bridewell · Lincoln College Prep, KCPS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. funding -->
+  <section class="slide">
+    <span class="corner-dot coral"></span>
+    <div class="eyebrow coral"><span class="bead"></span>The budget</div>
+    <h1 class="small">You're already watching the budget get cut.</h1>
+    <div class="quote">
+      It is lightyears ahead of their last one, but the BSSD has had 5 million cut from their future budget due to the state's budget shortfall. I want to put a stop to additional funding cuts and regain those funds.
+      <span class="who">Sarah Laub · Blue Springs School District</span>
+    </div>
+    <div class="quote">
+      I'm very proud of my kids' schools but I'm concerned if proposed legislation passes &amp; we lose billions in funding how that will effect them. Where will cuts be made? How can we ensure our kid's education &amp; activities are in tact?
+      <span class="who">Amber Frazier · Lee's Summit R-7</span>
+    </div>
+    <div class="quote">
+      Public education is under assault and is critical to the future of our nation.
+      <span class="who">Melissa Miller · Kirkwood · answering 'why organize'</span>
+    </div>
+  </section>
+
+  <!-- 10. power -->
+  <section class="slide">
+    <span class="corner-dot yellow"></span>
+    <div class="eyebrow yellow"><span class="bead"></span>Power</div>
+    <h1 class="small">You're not here to <span class="hl">"raise awareness"</span>. You want somewhere to put your anger.</h1>
+    <div class="quote yellow">
+      Organizing work has helped me to feel empowered in a system designed to disempower individuals and communities. I want to invite people into a recognition of their own power and agency in their communities and lives.
+      <span class="who">David Tremaine</span>
+    </div>
+    <div class="quote yellow">
+      Because if power is with the people then we have to organize the people to have the power to impact change. I want every school in the state to be as privileged as the one my kids currently go to.
+      <span class="who">Sarah Laub · Blue Springs</span>
+    </div>
+    <div class="quote yellow">
+      I have worked in advocacy for many years, but it wasn't until working with other parents I was able to advocate based on my own personal stakes. It has been empowering and has led to clear results in bringing resources to my kids and many others in the district. I hope to build my skills to help others to join me.
+      <span class="who">Ashley Sadowski · KCPS · Parents for KC Kids leader</span>
+    </div>
+  </section>
+
+  <!-- 11. leadership -->
+  <section class="slide">
+    <span class="corner-dot sage"></span>
+    <div class="eyebrow sage"><span class="bead"></span>What leadership means to you</div>
+    <h1 class="small">Almost nobody said "being in charge."</h1>
+    <p class="lede">We asked all 17 of you what leadership means. Hardly anyone described it as being the person out front. You talked about holding space, stepping back, handing things off, making room for someone else to try.</p>
+    <div class="grid2" style="margin-top:1.6rem;">
+      <div>
+        <div class="quote sage">
+          Leadership means creating a safe and courageous container for individual and communal transformation and liberation through support, collaborative learning, and empowerment.
+          <span class="who">David Tremaine</span>
+        </div>
+        <div class="quote sage">
+          Leadership is elevating and organizing the work of other people who have skills and abilities that contribute to the overall success of the organization and mission.
+          <span class="who">Judy Young</span>
+        </div>
+        <div class="quote sage">
+          Leadership means serving those you're leading. Being both their support and guide.
+          <span class="who">Sarah Laub</span>
+        </div>
+      </div>
+      <div>
+        <div class="quote sage">
+          Walking the walk, knowing when to follow, not being too good for any individual task, keeping people connected to the purpose and "why" behind their original involvement in whatever the situation is.
+          <span class="who">Benjamin Roesler</span>
+        </div>
+        <div class="quote sage">
+          Leadership, to me, means stepping into a role that scares you a little, and doing it anyway. It means taking a leap, doing the hard work of becoming a better version of yourself, and then turning around and giving others permission to do the same.
+          <span class="who">Stephanie Rittgers</span>
+        </div>
+        <div class="quote sage">
+          It's less about being visible and "in charge" and more about creating opportunities for other people to succeed.
+          <span class="who">LaNee Bridewell</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. hope -->
+  <section class="slide">
+    <span class="corner-dot yellow"></span>
+    <div class="eyebrow yellow"><span class="bead"></span>Hope</div>
+    <h1 class="small">Your hope is specific. It <span class="hl">points at wins that already happened</span>.</h1>
+    <div class="grid2" style="margin-top:1.8rem;">
+      <div>
+        <div class="quote yellow">
+          I had the privilege of speaking with Molly Fleming about what Parents for KC Kids accomplished last year, and it moved me. Hearing about how an organized group of parents was able to show up, make noise, and actually move the needle reminded me of what is possible when people are mobilized with purpose and skill. What gave me hope wasn't just the outcome. It was the model. It wasn't one charismatic leader who made it happen. It was a group of trained, connected parents who knew how to organize, how to recruit, and how to sustain momentum. That's replicable.
+          <span class="who">Stephanie Rittgers · St. Charles County</span>
+        </div>
+      </div>
+      <div>
+        <div class="quote yellow">
+          Seeing the results of many special elections throughout the country gives me hope that even in a state like Missouri we can find and mobilize enough people to make a difference and fight special interests that often harm the majority of Missourians.
+          <span class="who">Melissa Miller</span>
+        </div>
+        <div class="quote yellow">
+          Stories from the Civil Rights movement and the wins I've seen that have come out of more recent grassroots organizing, everything from raising minimum wage, KCPS families voting to pass the bond, Target boycott, etc.
+          <span class="who">LaNee Bridewell</span>
+        </div>
+        <div class="quote yellow">
+          History. Every progressive step we've made through out the last 250 yrs was achieved through organizing.
+          <span class="who">Sarah Laub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. magic wand -->
+  <section class="slide">
+    <span class="corner-dot peach"></span>
+    <div class="eyebrow peach"><span class="bead"></span>If you had a magic wand</div>
+    <h1 class="small">We asked for one thing. You gave us ten.</h1>
+    <p class="lede">Almost nobody picked just one. Schools are where you're standing right now, but you're also writing about housing, healthcare, reparations, income inequality, unifying your community, and making neighborhoods walkable. Nobody here is only about schools.</p>
+    <div class="quote">
+      All of my family, friends, and neighbors with children would have them enrolled in their local public school, the state would fully fund public education, there would be confidence in the school district to respond to the needs of the community, and people would have a renewed sense that their primary responsibility is not to themselves or their personal finances, but to the wellness of others and their community as a whole.
+      <span class="who">David Tremaine</span>
+    </div>
+    <div class="quote">
+      Housing for all, Healthcare for all, No Hungry stomachs, Healthy food sources within walking distance, support classes for caregivers, low to free cost childcare, low to free cost trade schools, etc.
+      <span class="who">AJ Johnson · Foreign Language Academy, KCPS</span>
+    </div>
+    <div class="quote">
+      More equitable and gainful economic opportunity. I really believe this is at the core of every other societal ill. Here in the northeast there are high rates of addiction and substance abuse, property crime and SA, human trafficking and narcotics trafficking, both of which come with violence. People with options, people with something to lose, they don't start doing meth and fentanyl; that's why those overdoses are called "deaths of despair."
+      <span class="who">Benjamin Roesler · Garfield Elementary</span>
+    </div>
+    <div class="chips">
+      <span class="chip">Reparations</span>
+      <span class="chip">Free healthcare and food for all</span>
+      <span class="chip">Unify our community</span>
+      <span class="chip">More minority women in power</span>
+      <span class="chip">Infrastructure that prioritizes people over cars</span>
+      <span class="chip">Equal access for every child</span>
+      <span class="chip">A less homogenized community</span>
+    </div>
+  </section>
+
+  <!-- 14. questions they asked -->
+  <section class="slide">
+    <span class="corner-dot plum"></span>
+    <div class="eyebrow plum"><span class="bead"></span>What you asked us</div>
+    <h1 class="small">Your questions are what <span class="hl">we owe you answers to</span>.</h1>
+    <ul class="qs">
+      <li>"What are the ongoing responsibilities and expectations after the fellowship ends? Where is the funding for this program coming from? What are the metrics to determine whether the overall program is successful? What is the long term vision?"
+        <span class="ask">Melissa Miller</span></li>
+      <li>"What is the hope for the organization after the Fellowship is complete?"
+        <span class="ask">Sierra Kilpatrick</span></li>
+      <li>"How are you measuring the starting point of each fellow's community? (If you want an increase of 50%, what's that starting #.) Do you expect the summer to help or hinder the goals? Are we tracking hours literally or going on vibes?"
+        <span class="ask">Ellen Schwartze</span></li>
+      <li>"I'm curious what this will look like in action on a weekly basis, but I also get that might have to be something I figure out as we go."
+        <span class="ask">Sarah Laub</span></li>
+      <li>"Will there be any financial support to the candidates that are chosen for travel to Columbia?"
+        <span class="ask">AJ Johnson</span></li>
+      <li>"What if I fail to achieve the desired goal in the specified timeframe? Despite the successes I hinted at, I have had several setbacks and failures as well."
+        <span class="ask">Benjamin Roesler</span></li>
+      <li>"When do we start?"
+        <span class="ask">David Tremaine</span></li>
+    </ul>
+    <p class="meta" style="margin-top:1.4rem;">Most of these fall in three piles: <span class="hl">what happens after these three months</span>, <span class="hl coral">how we'll know it worked</span>, and Benjamin's, which is <span class="hl sage">what if I'm not enough</span>. We'll spend real time on all three this weekend.</p>
+  </section>
+
+  <!-- 15. synthesis -->
+  <section class="slide">
+    <div class="eyebrow blue"><span class="bead"></span>If you're looking around the room</div>
+    <h1 class="small">Here's what you have in common.</h1>
+    <div class="grid2" style="margin-top:1.8rem;">
+      <div>
+        <div class="stat coral">
+          <div class="n">01</div>
+          <div class="lbl" style="margin-top:.8rem;font-size:1rem;font-weight:500;">You're not new to showing up.</div>
+          <p style="font-size:.9rem;line-height:1.5;margin-top:.5rem;opacity:.85;">PTA presidents, PAC co-presidents, advocacy groups you founded, equity committees, parent advisory boards. You're not here for permission to organize. You're here for a bigger room to do it in.</p>
+        </div>
+        <div class="stat yellow" style="margin-top:1.2rem;">
+          <div class="n">02</div>
+          <div class="lbl" style="margin-top:.8rem;font-size:1rem;font-weight:500;">You've hit the limit of what one family can do.</div>
+          <p style="font-size:.9rem;line-height:1.5;margin-top:.5rem;opacity:.85;">The IEP denial. The AP Chem shortage. The 5 million cut from Blue Springs. The thousand-person training list nobody's following up on. That's not a list of problems — it's a list of places one family ran out of runway.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat sage">
+          <div class="n">03</div>
+          <div class="lbl" style="margin-top:.8rem;font-size:1rem;font-weight:500;">You mostly don't think of leadership as being in charge.</div>
+          <p style="font-size:.9rem;line-height:1.5;margin-top:.5rem;opacity:.85;">You described it as pulling other people in. That's a cohort ready to coach, not just lead from the front.</p>
+        </div>
+        <div class="stat blue" style="margin-top:1.2rem;">
+          <div class="n">04</div>
+          <div class="lbl" style="margin-top:.8rem;font-size:1rem;font-weight:500;">You want to know how this ends.</div>
+          <p style="font-size:.9rem;line-height:1.5;margin-top:.5rem;opacity:.85;">The most common question was some version of: what's the long-term play? That's fair. You're auditioning us too, and we should act like it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16. closing pull -->
+  <section class="slide">
+    <span class="corner-dot blue"></span>
+    <div class="eyebrow blue"><span class="bead"></span>One last thing we want to sit with</div>
+    <p class="pull">Simply put, I am a middle class white man of a white male child, and this school's parent community would be more appropriately led by the black and brown women that make up most of this school's parent base, which is incredibly diverse.
+    <span class="who">Benjamin Roesler · Garfield Elementary · KCPS</span></p>
+  </section>
+
+  <!-- 17. final -->
+  <section class="slide title-slide">
+    <div class="eyebrow"><span class="bead"></span>Welcome to the fellowship</div>
+    <h1>Glad you're here.<br/>Three months starts now.</h1>
+    <p class="lede" style="margin-top:1rem;">Thanks for telling us who you are.</p>
+    <span class="deco" style="bottom:14vh;right:9vw;">see you in the room —</span>
+  </section>
+
+</div>
+
+<div class="hud">
+  <div class="left">
+    <button id="prev">◀ Prev</button>
+    <button id="next">Next ▶</button>
+    <span id="counter">01 / 17</span>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  let i = 0;
+  const n = slides.length;
+  function go(to){
+    i = (to + n) % n;
+    slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+    counter.textContent = String(i+1).padStart(2,'0') + ' / ' + String(n).padStart(2,'0');
+    progress.style.width = ((i+1)/n*100) + '%';
+  }
+  document.getElementById('next').onclick = ()=>go(i+1);
+  document.getElementById('prev').onclick = ()=>go(i-1);
+  document.addEventListener('keydown',(e)=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') go(i+1);
+    else if(e.key==='ArrowLeft'||e.key==='PageUp') go(i-1);
+    else if(e.key==='Home') go(0);
+    else if(e.key==='End') go(n-1);
+  });
+  go(0);
+</script>
+</body>
+</html>
